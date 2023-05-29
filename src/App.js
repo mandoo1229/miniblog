@@ -3,9 +3,15 @@ import './App.css';
 import { useState } from'react';
 
 function App() {
+  const todayTime = () => {
+    let date = new Date();
+    let todayYear = date.getFullYear();
+    let todayMonth = date.getMonth() + 1;
+    let todayDate = date.getDate();
 
-  const today = '5월 29일';
-  const date = new Date();
+    return todayYear + '.' + todayMonth + '.'  + todayDate ;
+  }
+
   const [a, b] = useState(['남자 코트 추천', '강남 우동 맛집', '파이썬 독학'])
   const [modal, setModal] = useState(false);
   const [good, setGood] = useState(0);
@@ -25,7 +31,7 @@ function App() {
             <h4 onClick={()=> { setModal(true); setTitle(w) }}>{ a[w] }
             <span onClick={(e)=> { e.stopPropagation(); setGood(good + 1)}}>👍🏻</span> { good }
             </h4>
-            <p>{ today }</p>
+            <span>{ todayTime() }</span>
             <button onClick={()=>{
               const copy = [...a];
               copy.splice(0,1);
@@ -53,10 +59,18 @@ function App() {
 }
 
 function Modal(props) {
+  const todayTime = () => {
+    let date = new Date();
+    let todayYear = date.getFullYear();
+    let todayMonth = date.getMonth() + 1;
+    let todayDate = date.getDate();
+
+    return todayYear + '.' + todayMonth + '.'  + todayDate ;
+  }
   return(
     <div className="modal">
       <h4>{props.a[props.title]}</h4>
-      <p>날짜</p>
+      <p>{ todayTime()}</p>
       <p>상세내용</p>
       <button onClick={()=> { props.b (['여자코트 추천', '강남 우동 맛집', '파이썬 독학'])}}>글수정</button>
     </div>
